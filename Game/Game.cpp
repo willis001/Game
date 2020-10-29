@@ -8,9 +8,26 @@ void Game::initVariables()
 
 void Game::initWindow()
 {
-	this->videoMode.height = 720;
-	this->videoMode.width = 1080;
-	this->window = new sf::RenderWindow(this->videoMode, "Title", sf::Style::Close | sf::Style::Titlebar);
+	std::ifstream ifs("Config/window.ini");
+
+	std::string title = "None";
+	sf::VideoMode window_bounds(1080, 720);
+	unsigned framerate_limit = 120;
+	bool vertical_sync_enabled = false;
+
+	if (ifs.is_open())
+	{
+		std::getline(ifs, title);
+		ifs >> window_bounds.width >> window_bounds.height;
+		ifs >> framerate_limit;
+		ifs >> vertical_sync_enabled;
+	}
+
+	ifs.close();
+
+	this->window = new sf::RenderWindow(window_bounds, title, sf::Style::Close | sf::Style::Titlebar);
+	this->window->setFramerateLimit(framerate_limit);
+	this->window->setVerticalSyncEnabled(vertical_sync_enabled);
 }
 
 Game::Game()
@@ -30,7 +47,7 @@ const bool Game::getWindowIsOpen() const
 }
 
 
-void Game::updateDT()
+void Game::updateDt()
 {
 	this->dt = this->dtClock.restart().asSeconds();
 
@@ -64,7 +81,7 @@ void Game::run()
 {
 	while (this->window->isOpen())
 	{
-		this->updateDT();
+		this->updateDt();
 		this->update();
 		this->render();
 	}

@@ -23,7 +23,7 @@ public:
 
 	const bool getWindowIsOpen() const;
 
-	void updateDT();
+	void updateDt();
 	void pollEvent();
 	void update();
 	void render();
