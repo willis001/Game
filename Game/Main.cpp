@@ -1,24 +1,52 @@
-#include<SFML/Graphics.hpp>
-#include<stdio.h>
-
+#include <iostream>
+#include "Game.h"
+#include "Player.h"
 int main()
 {
-	sf::RenderWindow renderWindow(sf::VideoMode(1080, 720), "Title");
+	/*sf::RenderWindow renderWindow(sf::VideoMode(1080, 720), "Title", sf::Style::Close | sf::Style::Titlebar);
 
-	sf::Event event;
+	sf::Event event;*/
 
-	sf::CircleShape circleShape(10);
-	circleShape.setPosition(100.f, 100.f);
-	circleShape.setFillColor(sf::Color::Red);
-	circleShape.setOrigin(circleShape.getRadius(),circleShape.getRadius());
+	Game game;
+
+	sf::Texture bg;
+	if (!bg.loadFromFile("res/image/background.png"))
+	{
+		std::cout << "Load bg failed" << std::endl;
+	}
+
+	sf::Sprite s(bg);
+	s.setTextureRect(sf::IntRect(0, 0, 1080, 720));
 
 	sf::RectangleShape collision(sf::Vector2f(200,40));
 	collision.setPosition(200.f, 200.f);
 	collision.setFillColor(sf::Color::White);
 
-	while (renderWindow.isOpen())
+	Player myPlayer("res/image/mainCharacter.png");
+	
+	/*sf::Texture mcSprite;
+	if (!mcSprite.loadFromFile("res/image/mainCharacter.png"))
 	{
-		while (renderWindow.pollEvent(event))
+		std::cout << "Load mainC failed" << std::endl;
+	}
+
+	sf::Sprite mainCharacter;
+	mainCharacter.setTexture(mcSprite);
+	mainCharacter.setTextureRect(sf::IntRect(0, 0, 18, 18));
+	
+	int spriteSizeX = mcSprite.getSize().x / 7;
+	int spriteSizeY = mcSprite.getSize().y / 2;
+
+	mainCharacter.setTextureRect(sf::IntRect(0, 0, spriteSizeX, spriteSizeY));
+
+	int animationFrame2 = 0;*/
+
+	sf::Clock clock;
+
+	while (game.getWindowIsOpen())
+	{
+		game.run();
+		/*while (renderWindow.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 			{
@@ -27,27 +55,42 @@ int main()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 		{
-			circleShape.move(-0.1f, 0.0f);
+			mainCharacter.move(-0.05f, 0.0f);
+			mainCharacter.setTextureRect(sf::IntRect(spriteSizeX * animationFrame2, spriteSizeY * 1, spriteSizeX, spriteSizeY));
+			myPlayer.movePlayer('l', 0.05f);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 		{
-			circleShape.move(0.1f, 0.0f);
+			mainCharacter.move(0.05f, 0.0f);
+			mainCharacter.setTextureRect(sf::IntRect(spriteSizeX * animationFrame2, spriteSizeY * 1, spriteSizeX, spriteSizeY));
+			myPlayer.movePlayer('r', 0.05f);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 		{
-			circleShape.move(0.0f, -0.1f);
+			mainCharacter.move(0.0f, -0.05f);
+			mainCharacter.setTextureRect(sf::IntRect(spriteSizeX * animationFrame2, spriteSizeY * 1, spriteSizeX, spriteSizeY));
+			myPlayer.movePlayer('u', 0.05f);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 		{
-			circleShape.move(0.0f, 0.1f);
+			mainCharacter.move(0.0f, 0.05f);
+			mainCharacter.setTextureRect(sf::IntRect(spriteSizeX * animationFrame2, spriteSizeY * 1, spriteSizeX, spriteSizeY));
+			myPlayer.movePlayer('d', 0.05f);
 		}
-		if (collision.getGlobalBounds().intersects(circleShape.getGlobalBounds())) {
-			circleShape.setPosition(10.f,10.f);
+		if (collision.getGlobalBounds().intersects(mainCharacter.getGlobalBounds())) {
+			mainCharacter.setPosition(10.f,10.f);
+		}
+		animationFrame2++;
+
+		if (animationFrame2 >= 7) {
+			animationFrame2 = 0;
 		}
 		renderWindow.clear();
-		renderWindow.draw(circleShape);
+		renderWindow.draw(s);
+		//renderWindow.draw(mainCharacter);
+		myPlayer.drawPlayer(renderWindow);
 		renderWindow.draw(collision);
-		renderWindow.display();
+		renderWindow.display();*/
 	}
 	return 0;
 }
