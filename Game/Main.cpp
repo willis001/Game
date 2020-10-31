@@ -1,4 +1,14 @@
-#include <iostream>
+/*#include <iostream>
+#include<vector>
+#include<iostream>
+#include<fstream>
+#include<sstream>
+
+#include<SFML/Graphics.hpp>
+#include<SFML/System.hpp>
+#include<SFML/Window.hpp>
+#include<SFML/Audio.hpp>
+#include<SFML/Network.hpp>*/
 #include "Game.h"
 #include "Player.h"
 int main()
@@ -9,7 +19,7 @@ int main()
 
 	Game game;
 
-	sf::Texture bg;
+	/*sf::Texture bg;
 	if (!bg.loadFromFile("res/image/background.png"))
 	{
 		std::cout << "Load bg failed" << std::endl;
@@ -20,7 +30,7 @@ int main()
 
 	sf::RectangleShape collision(sf::Vector2f(200,40));
 	collision.setPosition(200.f, 200.f);
-	collision.setFillColor(sf::Color::White);
+	collision.setFillColor(sf::Color::White);*/
 
 	Player myPlayer("res/image/mainCharacter.png");
 	
@@ -43,7 +53,7 @@ int main()
 
 	sf::Clock clock;
 
-	while (game.getWindowIsOpen())
+	while (/*renderWindow.isOpen()*/game.getWindowIsOpen())
 	{
 		game.run();
 		/*while (renderWindow.pollEvent(event))
@@ -57,25 +67,25 @@ int main()
 		{
 			mainCharacter.move(-0.05f, 0.0f);
 			mainCharacter.setTextureRect(sf::IntRect(spriteSizeX * animationFrame2, spriteSizeY * 1, spriteSizeX, spriteSizeY));
-			myPlayer.movePlayer('l', 0.05f);
+			//myPlayer.movePlayer('l', 0.05f);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 		{
 			mainCharacter.move(0.05f, 0.0f);
 			mainCharacter.setTextureRect(sf::IntRect(spriteSizeX * animationFrame2, spriteSizeY * 1, spriteSizeX, spriteSizeY));
-			myPlayer.movePlayer('r', 0.05f);
+			//myPlayer.movePlayer('r', 0.05f);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 		{
 			mainCharacter.move(0.0f, -0.05f);
 			mainCharacter.setTextureRect(sf::IntRect(spriteSizeX * animationFrame2, spriteSizeY * 1, spriteSizeX, spriteSizeY));
-			myPlayer.movePlayer('u', 0.05f);
+			//myPlayer.movePlayer('u', 0.05f);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 		{
 			mainCharacter.move(0.0f, 0.05f);
 			mainCharacter.setTextureRect(sf::IntRect(spriteSizeX * animationFrame2, spriteSizeY * 1, spriteSizeX, spriteSizeY));
-			myPlayer.movePlayer('d', 0.05f);
+			//myPlayer.movePlayer('d', 0.05f);
 		}
 		if (collision.getGlobalBounds().intersects(mainCharacter.getGlobalBounds())) {
 			mainCharacter.setPosition(10.f,10.f);
@@ -87,7 +97,7 @@ int main()
 		}
 		renderWindow.clear();
 		renderWindow.draw(s);
-		//renderWindow.draw(mainCharacter);
+		renderWindow.draw(mainCharacter);
 		myPlayer.drawPlayer(renderWindow);
 		renderWindow.draw(collision);
 		renderWindow.display();*/
